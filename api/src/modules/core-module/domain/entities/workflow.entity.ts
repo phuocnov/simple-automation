@@ -1,4 +1,6 @@
 import { BaseEntity } from "src/shared/domain/base.entity";
+import { Node } from "./node.entity";
+import { Edge } from "./edge.entity";
 
 export class Workflow extends BaseEntity {
   constructor(
@@ -16,18 +18,4 @@ export class Workflow extends BaseEntity {
   public canBeActivated(): boolean {
     return this.nodes.length > 0 && this.nodes.some(n => n.type.includes('trigger'))
   }
-}
-
-export class Node extends BaseEntity {
-  type: string;
-  data: unknown;
-  position: {
-    x: number;
-    y: number;
-  }
-}
-
-export class Edge extends BaseEntity {
-  source: string;
-  target: string;
 }
