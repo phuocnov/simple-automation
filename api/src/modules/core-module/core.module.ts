@@ -10,6 +10,8 @@ import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
 import { WorkflowMapper } from './infra/mappings/workflow.mapper';
 import { CreateWorkflowHandler } from './application/handlers/create-workflow-handler';
+import { NodeMapper } from './infra/mappings/node.mapper';
+import { EdgeMapper } from './infra/mappings/edge.mapper';
 
 @Module({
   imports: [
@@ -20,6 +22,12 @@ import { CreateWorkflowHandler } from './application/handlers/create-workflow-ha
     TypeOrmModule.forFeature([WorkflowSchema, NodeSchema, EdgeSchema]),
   ],
   controllers: [WorkflowController],
-  providers: [GetWorkFlowListHandler, CreateWorkflowHandler, WorkflowMapper],
+  providers: [
+    GetWorkFlowListHandler,
+    CreateWorkflowHandler,
+    NodeMapper,
+    EdgeMapper,
+    WorkflowMapper,
+  ],
 })
 export class CoreModuleModule {}

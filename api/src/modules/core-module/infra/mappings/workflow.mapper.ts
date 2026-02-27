@@ -29,43 +29,10 @@ export class WorkflowMapper extends AutomapperProfile {
     return (mapper: Mapper) => {
       createMap(
         mapper,
-        NodeSchema,
-        Node,
-        constructUsing(
-          (source) =>
-            new Node(
-              source.id,
-              source.type,
-              source.data,
-              source.position,
-              source.createdAt,
-              source.updatedAt,
-            ),
-        ),
-      );
-
-      createMap(
-        mapper,
-        EdgeSchema,
-        Edge,
-        constructUsing(
-          (source) =>
-            new Edge(
-              source.id,
-              source.sourceId,
-              source.targetId,
-              source.createdAt,
-              source.updatedAt,
-            ),
-        ),
-      );
-
-      createMap(
-        mapper,
         WorkflowSchema,
         Workflow,
         constructUsing(
-          (source) =>
+          (source: WorkflowSchema) =>
             new Workflow(
               source.id,
               source.name,
@@ -88,23 +55,23 @@ export class WorkflowMapper extends AutomapperProfile {
         WorkflowItemDto,
         forMember(
           (dest) => dest.id,
-          mapFrom((source) => source.id),
+          mapFrom((source: WorkflowSchema) => source.id),
         ),
         forMember(
           (dest) => dest.name,
-          mapFrom((source) => source.name),
+          mapFrom((source: WorkflowSchema) => source.name),
         ),
         forMember(
           (dest) => dest.isActive,
-          mapFrom((source) => source.isActive),
+          mapFrom((source: WorkflowSchema) => source.isActive),
         ),
         forMember(
           (dest) => dest.nodeCount,
-          mapFrom((source) => source.nodes?.length || 0),
+          mapFrom((source: WorkflowSchema) => source.nodes?.length || 0),
         ),
         forMember(
           (dest) => dest.createdAt,
-          mapFrom((source) => source.createdAt.toISOString()),
+          mapFrom((source: WorkflowSchema) => source.createdAt.toISOString()),
         ),
       );
 
@@ -114,7 +81,7 @@ export class WorkflowMapper extends AutomapperProfile {
         WorkflowSchema,
         forMember(
           (dest) => dest.name,
-          mapFrom((source) => source.name),
+          mapFrom((source: CreateWorkflowCommand) => source.name),
         ),
       );
 
@@ -124,23 +91,23 @@ export class WorkflowMapper extends AutomapperProfile {
         WorkflowItemDto,
         forMember(
           (dest) => dest.id,
-          mapFrom((source) => source.id),
+          mapFrom((source: Workflow) => source.id),
         ),
         forMember(
           (dest) => dest.name,
-          mapFrom((source) => source.name),
+          mapFrom((source: Workflow) => source.name),
         ),
         forMember(
           (dest) => dest.isActive,
-          mapFrom((source) => source.isActive),
+          mapFrom((source: Workflow) => source.isActive),
         ),
         forMember(
           (dest) => dest.nodeCount,
-          mapFrom((source) => source.nodes?.length || 0),
+          mapFrom((source: Workflow) => source.nodes?.length || 0),
         ),
         forMember(
           (dest) => dest.createdAt,
-          mapFrom((source) => source.createdAt.toISOString()),
+          mapFrom((source: Workflow) => source.createdAt.toISOString()),
         ),
       );
 
@@ -150,23 +117,23 @@ export class WorkflowMapper extends AutomapperProfile {
         CreateWorkflowResponse,
         forMember(
           (dest) => dest.id,
-          mapFrom((source) => source.id),
+          mapFrom((source: Workflow) => source.id),
         ),
         forMember(
           (dest) => dest.name,
-          mapFrom((source) => source.name),
+          mapFrom((source: Workflow) => source.name),
         ),
         forMember(
           (dest) => dest.isActive,
-          mapFrom((source) => source.isActive),
+          mapFrom((source: Workflow) => source.isActive),
         ),
         forMember(
           (dest) => dest.nodeCount,
-          mapFrom((source) => source.nodes?.length || 0),
+          mapFrom((source: Workflow) => source.nodes?.length || 0),
         ),
         forMember(
           (dest) => dest.createdAt,
-          mapFrom((source) => source.createdAt.toISOString()),
+          mapFrom((source: Workflow) => source.createdAt.toISOString()),
         ),
       );
     };
