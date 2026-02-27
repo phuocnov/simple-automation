@@ -6,6 +6,7 @@ export class Workflow extends BaseEntity {
   constructor(
     public readonly id: string,
     public name: string,
+    public isActive: boolean,
     public nodes: Node[],
     public edges: Edge[],
     createdAt: Date,

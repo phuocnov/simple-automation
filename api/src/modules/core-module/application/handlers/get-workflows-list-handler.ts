@@ -7,12 +7,15 @@ import {
   WorkflowItemDto,
   WorkflowListResponseDto,
 } from '../dtos/workflow-list-response.dto';
+import { InjectMapper } from 'automapper-nestjs';
+import { Mapper } from 'automapper-core';
 
 @QueryHandler(GetWorkflowsListQuery)
 export class GetWorkFlowListHandler implements IQueryHandler<GetWorkflowsListQuery> {
   constructor(
     @InjectRepository(WorkflowSchema)
     private readonly repository: Repository<WorkflowSchema>,
+    @InjectMapper() private readonly mapper: Mapper,
   ) { }
 
   async execute(
@@ -25,14 +28,11 @@ export class GetWorkFlowListHandler implements IQueryHandler<GetWorkflowsListQue
       order: { createdAt: 'DESC' },
     });
 
-    // Manual Mapping: Schema -> Response DTO
-    const items: WorkflowItemDto[] = entities.map((schema) => ({
-      id: schema.id,
-      name: schema.name,
-      isActive: schema.isActive,
-      nodeCount: schema.nodes?.length || 0,
-      createdAt: schema.createdAt.toISOString(), // Convert Date object to String
-    }));
+    const items: WorkflowItemDto[] = this.mapper.mapArray(
+      entities,
+      WorkflowSchema,
+      WorkflowItemDto,
+    );
 
     return { items, total };
   }
