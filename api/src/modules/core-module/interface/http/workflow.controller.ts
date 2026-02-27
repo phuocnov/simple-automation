@@ -1,6 +1,8 @@
 import {
+  Body,
   Controller,
   Get,
+  Post,
   Query,
   UsePipes,
   ValidationPipe,
@@ -8,7 +10,8 @@ import {
 import { QueryBus } from '@nestjs/cqrs';
 import { GetWorkflowsQueryDto } from '../dtos/get-workflows-query.dto';
 import { GetWorkflowsListQuery } from '../../application/queries/get-workflows-list.query';
-import { WorkflowListResponseDto } from '../../application/dtos/workflow-list-response.dto';
+import { CreateWorkflowResponse, WorkflowListResponseDto } from '../../application/dtos/workflow-list-response.dto';
+import { CreateWorkflowDto } from '../dtos/create-workflows.dto';
 
 @Controller('workflows')
 export class WorkflowController {
@@ -22,5 +25,12 @@ export class WorkflowController {
     return this.queryBus.execute<WorkflowListResponseDto>(
       new GetWorkflowsListQuery(dto.limit, dto.offset),
     );
+  }
+
+  @Post()
+  async create(
+    @Body() createWorkflowDto: CreateWorkflowDto
+  ): Promise<CreateWorkflowResponse> {
+    return this.queryBus
   }
 }

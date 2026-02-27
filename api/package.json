@@ -26,7 +26,10 @@
     "repl": "ts-node src/repl.ts"
   },
   "dependencies": {
+    "@automapper/classes": "^8.8.1",
     "@automapper/core": "^8.8.1",
+    "@automapper/nestjs": "^8.8.1",
+    "@automapper/types": "^6.3.1",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^11.0.1",

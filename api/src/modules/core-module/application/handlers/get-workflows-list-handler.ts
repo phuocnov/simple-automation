@@ -13,12 +13,13 @@ export class GetWorkFlowListHandler implements IQueryHandler<GetWorkflowsListQue
   constructor(
     @InjectRepository(WorkflowSchema)
     private readonly repository: Repository<WorkflowSchema>,
-  ) {}
+  ) { }
 
   async execute(
     query: GetWorkflowsListQuery,
   ): Promise<WorkflowListResponseDto> {
     const [entities, total] = await this.repository.findAndCount({
+      relations: ['nodes', 'edges'],
       take: query.limit,
       skip: query.offset,
       order: { createdAt: 'DESC' },
