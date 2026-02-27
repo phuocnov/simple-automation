@@ -12,7 +12,7 @@ import { WorkflowListResponseDto } from '../../application/dtos/workflow-list-re
 
 @Controller('workflows')
 export class WorkflowController {
-  constructor(private readonly queryBus: QueryBus) {}
+  constructor(private readonly queryBus: QueryBus) { }
 
   @Get()
   @UsePipes(new ValidationPipe({ transform: true }))
