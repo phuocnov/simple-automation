@@ -1,16 +1,18 @@
 import { BaseSchema } from "src/shared/infra/persistence/base.schema";
-import { Column, Entity } from "typeorm";
+import { Column, Entity, OneToMany } from "typeorm";
+import { NodeSchema } from "./node.schema";
+import { EdgeSchema } from "./edge.schema";
 
 @Entity('workflows')
 export class WorkflowSchema extends BaseSchema {
   @Column()
   name: string;
 
-  @Column({ type: 'jsonb', default: [] })
-  nodes: unknown[];
+  @OneToMany(() => NodeSchema, node => node.workflow)
+  nodes: NodeSchema[];
 
-  @Column({ type: 'jsonb', default: [] })
-  edges: unknown[];
+  @OneToMany(() => EdgeSchema, edge => edge.workflow)
+  edges: EdgeSchema[];
 
   @Column({ default: false })
   isActive: boolean
