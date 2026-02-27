@@ -31,6 +31,5 @@ export class WorkflowController {
   async create(
     @Body() createWorkflowDto: CreateWorkflowDto
   ): Promise<CreateWorkflowResponse> {
-    return this.queryBus
   }
 }
