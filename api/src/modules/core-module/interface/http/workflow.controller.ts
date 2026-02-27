@@ -8,6 +8,14 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import {
+  ApiBody,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
 import { GetWorkflowsQueryDto } from '../dtos/get-workflows-query.dto';
 import { GetWorkflowsListQuery } from '../../application/queries/get-workflows-list.query';
 import { CreateWorkflowResponse, WorkflowListResponseDto } from '../../application/dtos/workflow-list-response.dto';
@@ -17,6 +25,7 @@ import { InjectMapper } from '@automapper/nestjs';
 import { Mapper } from '@automapper/core';
 import { Workflow } from '../../domain/entities/workflow.entity';
 
+@ApiTags('workflows')
 @Controller('workflows')
 export class WorkflowController {
   constructor(
@@ -27,6 +36,22 @@ export class WorkflowController {
 
   @Get()
   @UsePipes(new ValidationPipe({ transform: true }))
+  @ApiOperation({ summary: 'Get workflows list' })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    type: Number,
+    example: 10,
+    description: 'Number of items to return (1-100).',
+  })
+  @ApiQuery({
+    name: 'offset',
+    required: false,
+    type: Number,
+    example: 0,
+    description: 'Number of items to skip.',
+  })
+  @ApiOkResponse({ type: WorkflowListResponseDto })
   async findAll(
     @Query() dto: GetWorkflowsQueryDto,
   ): Promise<WorkflowListResponseDto> {
@@ -36,6 +61,9 @@ export class WorkflowController {
   }
 
   @Post()
+  @ApiOperation({ summary: 'Create workflow' })
+  @ApiBody({ type: CreateWorkflowDto })
+  @ApiCreatedResponse({ type: CreateWorkflowResponse })
   async create(
     @Body() createWorkflowDto: CreateWorkflowDto
   ): Promise<CreateWorkflowResponse> {

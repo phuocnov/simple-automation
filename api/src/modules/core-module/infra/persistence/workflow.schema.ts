@@ -8,6 +8,9 @@ export class WorkflowSchema extends BaseSchema {
   @Column()
   name: string;
 
+  @Column({ nullable: true })
+  description: string;
+
   @OneToMany(() => NodeSchema, (node) => node.workflow)
   nodes: NodeSchema[];
 

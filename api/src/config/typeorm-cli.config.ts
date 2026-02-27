@@ -7,7 +7,7 @@ export default new DataSource({
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
-  entities: ['src/modules/**/infra/persistence/*.schema.ts'],
-  migrations: ['src/database/migrations/*.ts'],
+  entities: ['src/modules/**/infra/persistence/*.schema.ts', 'src/shared/**/infra/persistence/*.schema.ts'],
+  migrations: ['src/database/*.ts'],
   logging: true,
 });

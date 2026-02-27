@@ -1,12 +1,12 @@
 import { PrimaryColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 export abstract class BaseSchema {
-  @PrimaryColumn('uuid')
-  id: string;
+  @PrimaryColumn({ type: 'uuid' })
+  id!: string;
 
   @CreateDateColumn({ type: 'timestamptz' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ type: 'timestamptz' })
-  updatedAt: Date;
+  updatedAt!: Date;
 }
