@@ -4,8 +4,8 @@ import { WorkflowSchema } from "../../infra/persistence/workflow.schema";
 import { Repository } from "typeorm";
 import { Workflow } from "../../domain/entities/workflow.entity";
 import { InjectRepository } from "@nestjs/typeorm";
-import { InjectMapper } from "automapper-nestjs";
-import { Mapper } from "automapper-core";
+import { InjectMapper } from "@automapper/nestjs";
+import { Mapper } from "@automapper/core";
 
 @CommandHandler(CreateWorkflowCommand)
 export class CreateWorkflowHandler implements ICommandHandler<CreateWorkflowCommand> {

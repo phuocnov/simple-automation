@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { AutomapperProfile, InjectMapper } from 'automapper-nestjs';
+import { AutomapperProfile, InjectMapper } from '@automapper/nestjs';
 import {
   Mapper,
   createMap,
   forMember,
   mapFrom,
   constructUsing,
-} from 'automapper-core';
+} from '@automapper/core';
 import { WorkflowSchema } from '../persistence/workflow.schema';
 import { Workflow } from '../../domain/entities/workflow.entity';
 import { NodeSchema } from '../persistence/node.schema';

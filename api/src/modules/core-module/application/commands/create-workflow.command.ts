@@ -1,7 +1,7 @@
 import { Command } from "@nestjs/cqrs";
-import { CreateWorkflowDto } from "../../interface/dtos/create-workflows.dto";
+import { Workflow } from "../../domain/entities/workflow.entity";
 
-export class CreateWorkflowCommand extends Command<CreateWorkflowDto> {
+export class CreateWorkflowCommand extends Command<Workflow> {
   constructor(
     public readonly name: string,
     public readonly description?: string,

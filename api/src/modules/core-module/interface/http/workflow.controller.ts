@@ -13,8 +13,8 @@ import { GetWorkflowsListQuery } from '../../application/queries/get-workflows-l
 import { CreateWorkflowResponse, WorkflowListResponseDto } from '../../application/dtos/workflow-list-response.dto';
 import { CreateWorkflowDto } from '../dtos/create-workflows.dto';
 import { CreateWorkflowCommand } from '../../application/commands/create-workflow.command';
-import { InjectMapper } from 'automapper-nestjs';
-import { Mapper } from 'automapper-core';
+import { InjectMapper } from '@automapper/nestjs';
+import { Mapper } from '@automapper/core';
 import { Workflow } from '../../domain/entities/workflow.entity';
 
 @Controller('workflows')
