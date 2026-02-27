@@ -1,7 +1,7 @@
-import { BaseSchema } from "src/shared/infra/persistence/base.schema";
-import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
-import { WorkflowSchema } from "./workflow.schema";
-import { NodeSchema } from "./node.schema";
+import { BaseSchema } from 'src/shared/infra/persistence/base.schema';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { WorkflowSchema } from './workflow.schema';
+import { NodeSchema } from './node.schema';
 
 @Entity('edges')
 export class EdgeSchema extends BaseSchema {
@@ -11,16 +11,16 @@ export class EdgeSchema extends BaseSchema {
   @Column()
   targetId: string;
 
-  @ManyToOne(() => WorkflowSchema, workflow => workflow.edges, {
-    onDelete: 'CASCADE'
+  @ManyToOne(() => WorkflowSchema, (workflow) => workflow.edges, {
+    onDelete: 'CASCADE',
   })
   workflow: WorkflowSchema;
 
   @ManyToOne(() => NodeSchema, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'sourceId' })
-  source: NodeSchema
+  source: NodeSchema;
 
   @ManyToOne(() => NodeSchema, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'targetId' })
-  target: NodeSchema
+  target: NodeSchema;
 }

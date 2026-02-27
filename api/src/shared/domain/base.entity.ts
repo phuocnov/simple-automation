@@ -3,7 +3,7 @@ export abstract class BaseEntity {
     public readonly id: string,
     public readonly createdAt: Date,
     public updatedAt: Date,
-  ) { }
+  ) {}
 
   // Example of domain logic shared by all entities
   public equals(other: BaseEntity): boolean {

@@ -1,4 +1,4 @@
-import { BaseEntity } from "src/shared/domain/base.entity";
+import { BaseEntity } from 'src/shared/domain/base.entity';
 
 export class Node extends BaseEntity {
   constructor(
@@ -12,6 +12,6 @@ export class Node extends BaseEntity {
     createdAt: Date,
     updatedAt: Date,
   ) {
-    super(id, createdAt, updatedAt)
+    super(id, createdAt, updatedAt);
   }
 }

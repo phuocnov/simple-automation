@@ -15,7 +15,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     CommonModule,
     ConfigModule.forRoot({
       load: [configuration],
-      isGlobal: true
+      isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -29,10 +29,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         database: configService.get<string>('database.database'),
         autoLoadEntities: true,
         synchronize: false,
-      })
-    })
+      }),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

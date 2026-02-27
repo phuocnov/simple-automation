@@ -8,8 +8,11 @@ import { EdgeSchema } from './infra/persistence/edge.schema';
 import { WorkflowController } from './interface/http/workflow.controller';
 
 @Module({
-  imports: [CqrsModule, TypeOrmModule.forFeature([WorkflowSchema, NodeSchema, EdgeSchema])],
+  imports: [
+    CqrsModule,
+    TypeOrmModule.forFeature([WorkflowSchema, NodeSchema, EdgeSchema]),
+  ],
   controllers: [WorkflowController],
   providers: [GetWorkFlowListHandler],
 })
-export class CoreModuleModule { }
+export class CoreModuleModule {}

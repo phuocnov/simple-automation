@@ -1,0 +1,32 @@
+{
+  "name": "simple-automation",
+  "private": true,
+  "version": "1.0.0",
+  "description": "PORT=3000",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phuocnov/simple-automation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/phuocnov/simple-automation/issues"
+  },
+  "homepage": "https://github.com/phuocnov/simple-automation#readme",
+  "workspaces": [
+    "api",
+    "webs"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "npm run lint -w api && npm run lint -w webs",
+    "test": "npm run test  -w api && npm run test -w webs"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7"
+  }
+}

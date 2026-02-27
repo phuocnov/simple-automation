@@ -1,4 +1,4 @@
-import { BaseEntity } from "src/shared/domain/base.entity";
+import { BaseEntity } from 'src/shared/domain/base.entity';
 
 export class Edge extends BaseEntity {
   constructor(
@@ -6,8 +6,8 @@ export class Edge extends BaseEntity {
     public source: string,
     public target: string,
     createdAt: Date,
-    updatedAt: Date
+    updatedAt: Date,
   ) {
-    super(id, createdAt, updatedAt)
+    super(id, createdAt, updatedAt);
   }
 }

@@ -1,7 +1,7 @@
-import { BaseSchema } from "src/shared/infra/persistence/base.schema";
-import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
-import { WorkflowSchema } from "./workflow.schema";
-import { EdgeSchema } from "./edge.schema";
+import { BaseSchema } from 'src/shared/infra/persistence/base.schema';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { WorkflowSchema } from './workflow.schema';
+import { EdgeSchema } from './edge.schema';
 
 @Entity('nodes')
 export class NodeSchema extends BaseSchema {
@@ -9,22 +9,22 @@ export class NodeSchema extends BaseSchema {
   type: string;
 
   @Column({ type: 'jsonb' })
-  data: unknown
+  data: unknown;
 
   @Column({ type: 'jsonb' })
   position: {
-    x: number,
-    y: number
-  }
+    x: number;
+    y: number;
+  };
 
-  @ManyToOne(() => WorkflowSchema, workflow => workflow.nodes, {
-    onDelete: 'CASCADE'
+  @ManyToOne(() => WorkflowSchema, (workflow) => workflow.nodes, {
+    onDelete: 'CASCADE',
   })
-  workflow: WorkflowSchema
+  workflow: WorkflowSchema;
 
-  @OneToMany(() => EdgeSchema, edge => edge.source)
+  @OneToMany(() => EdgeSchema, (edge) => edge.source)
   outgoingEdges: EdgeSchema[];
 
-  @OneToMany(() => EdgeSchema, edge => edge.target)
+  @OneToMany(() => EdgeSchema, (edge) => edge.target)
   incomingEdges: EdgeSchema[];
 }
