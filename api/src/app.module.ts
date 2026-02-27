@@ -7,8 +7,6 @@ import { CommonModule } from './modules/common/common.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AutomapperModule } from '@automapper/nestjs';
-import { classes } from '@automapper/classes';
 
 @Module({
   imports: [
@@ -32,9 +30,6 @@ import { classes } from '@automapper/classes';
         autoLoadEntities: true,
         synchronize: false,
       }),
-    }),
-    AutomapperModule.forRoot({
-      strategyInitializer: classes(),
     }),
   ],
   controllers: [AppController],

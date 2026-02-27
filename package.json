@@ -16,14 +16,15 @@
     "url": "https://github.com/phuocnov/simple-automation/issues"
   },
   "homepage": "https://github.com/phuocnov/simple-automation#readme",
+  "packageManager": "pnpm@9.15.5",
   "workspaces": [
     "api",
     "webs"
   ],
   "scripts": {
     "prepare": "husky install",
-    "lint": "npm run lint -w api && npm run lint -w webs",
-    "test": "npm run test  -w api && npm run test -w webs"
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test"
   },
   "devDependencies": {
     "husky": "^9.1.7",

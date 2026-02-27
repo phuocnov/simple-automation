@@ -1,9 +1,10 @@
 services:
   api:
     build:
-      context: .
+      context: ..
+      dockerfile: api/Dockerfile
       target: development
-    command: sh -c "if [ ! -d node_modules ] || [ -z \"$(ls -A node_modules 2>/dev/null)\" ]; then npm install; fi && npm run start:dev"
+    command: sh -c "if [ ! -d node_modules ] || [ -z \"$(ls -A node_modules 2>/dev/null)\" ]; then pnpm install; fi && pnpm run start:dev"
     ports:
       - '3000:3000'
     env_file:
@@ -11,8 +12,8 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ..:/app
+      - /app/api/node_modules
     depends_on:
       db:
         condition: service_healthy
