@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { AutomapperProfile, InjectMapper } from '@automapper/nestjs';
 import { Mapper, createMap, constructUsing } from '@automapper/core';
-import { EdgeSchema } from '../persistence/edge.schema';
-import { Edge } from '../../domain/entities/edge.entity';
+import { NodeSchema } from '../persistence/node.schema';
+import { Node } from '../entities/node.entity';
 
 @Injectable()
-export class EdgeMapper extends AutomapperProfile {
+export class NodeMapper extends AutomapperProfile {
   constructor(@InjectMapper() mapper: Mapper) {
     super(mapper);
   }
@@ -14,14 +14,15 @@ export class EdgeMapper extends AutomapperProfile {
     return (mapper: Mapper) => {
       createMap(
         mapper,
-        EdgeSchema,
-        Edge,
+        NodeSchema,
+        Node,
         constructUsing(
-          (source: EdgeSchema) =>
-            new Edge(
+          (source: NodeSchema) =>
+            new Node(
               source.id,
-              source.sourceId,
-              source.targetId,
+              source.type,
+              source.data,
+              source.position,
               source.createdAt,
               source.updatedAt,
             ),

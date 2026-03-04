@@ -8,16 +8,15 @@ import {
   constructUsing,
 } from '@automapper/core';
 import { WorkflowSchema } from '../persistence/workflow.schema';
-import { Workflow } from '../../domain/entities/workflow.entity';
+import { Workflow } from '../entities/workflow.entity';
 import { NodeSchema } from '../persistence/node.schema';
-import { Node } from '../../domain/entities/node.entity';
+import { Node } from '../entities/node.entity';
 import { EdgeSchema } from '../persistence/edge.schema';
-import { Edge } from '../../domain/entities/edge.entity';
+import { Edge } from '../entities/edge.entity';
 import {
   CreateWorkflowResponse,
   WorkflowItemDto,
-} from '../../application/dtos/workflow-list-response.dto';
-import { CreateWorkflowCommand } from '../../application/commands/create-workflow.command';
+} from '../dtos/workflow-list-response.dto';
 
 @Injectable()
 export class WorkflowMapper extends AutomapperProfile {
@@ -72,16 +71,6 @@ export class WorkflowMapper extends AutomapperProfile {
         forMember(
           (dest) => dest.createdAt,
           mapFrom((source: WorkflowSchema) => source.createdAt.toISOString()),
-        ),
-      );
-
-      createMap(
-        mapper,
-        CreateWorkflowCommand,
-        WorkflowSchema,
-        forMember(
-          (dest) => dest.name,
-          mapFrom((source: CreateWorkflowCommand) => source.name),
         ),
       );
 

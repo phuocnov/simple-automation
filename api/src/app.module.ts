@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CqrsModule } from '@nestjs/cqrs';
 import { CoreModuleModule } from './modules/core-module/core.module';
 import { CommonModule } from './modules/common/common.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -10,7 +9,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    CqrsModule.forRoot(),
     CoreModuleModule,
     CommonModule,
     ConfigModule.forRoot({

@@ -7,7 +7,6 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import {
   ApiBody,
   ApiCreatedResponse,
@@ -17,20 +16,21 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { GetWorkflowsQueryDto } from '../dtos/get-workflows-query.dto';
-import { GetWorkflowsListQuery } from '../../application/queries/get-workflows-list.query';
-import { CreateWorkflowResponse, WorkflowListResponseDto } from '../../application/dtos/workflow-list-response.dto';
+import {
+  CreateWorkflowResponse,
+  WorkflowListResponseDto,
+} from '../dtos/workflow-list-response.dto';
 import { CreateWorkflowDto } from '../dtos/create-workflows.dto';
-import { CreateWorkflowCommand } from '../../application/commands/create-workflow.command';
 import { InjectMapper } from '@automapper/nestjs';
 import { Mapper } from '@automapper/core';
-import { Workflow } from '../../domain/entities/workflow.entity';
+import { Workflow } from '../entities/workflow.entity';
+import { WorkflowService } from '../services/workflow.service';
 
 @ApiTags('workflows')
 @Controller('workflows')
 export class WorkflowController {
   constructor(
-    private readonly queryBus: QueryBus,
-    private readonly commandBus: CommandBus,
+    private readonly workflowService: WorkflowService,
     @InjectMapper() private readonly mapper: Mapper,
   ) { }
 
@@ -55,9 +55,7 @@ export class WorkflowController {
   async findAll(
     @Query() dto: GetWorkflowsQueryDto,
   ): Promise<WorkflowListResponseDto> {
-    return this.queryBus.execute<WorkflowListResponseDto>(
-      new GetWorkflowsListQuery(dto.limit, dto.offset),
-    );
+    return this.workflowService.listWorkflows(dto.limit, dto.offset);
   }
 
   @Post()
@@ -67,12 +65,7 @@ export class WorkflowController {
   async create(
     @Body() createWorkflowDto: CreateWorkflowDto
   ): Promise<CreateWorkflowResponse> {
-    const workflow = await this.commandBus.execute<Workflow>(
-      new CreateWorkflowCommand(
-        createWorkflowDto.name,
-        createWorkflowDto.description,
-      ),
-    );
+    const workflow = await this.workflowService.createWorkflow(createWorkflowDto);
 
     return this.mapper.map(workflow, Workflow, CreateWorkflowResponse);
   }
