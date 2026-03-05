@@ -25,4 +25,4 @@ export class WorkflowListResponseDto {
   total: number;
 }
 
-export class CreateWorkflowResponse extends WorkflowItemDto { }
+export class CreateWorkflowResponse extends WorkflowItemDto {}

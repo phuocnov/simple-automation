@@ -4,14 +4,13 @@ import { Repository } from 'typeorm';
 import { InjectMapper } from '@automapper/nestjs';
 import { Mapper } from '@automapper/core';
 import { v4 as uuidv4 } from 'uuid';
-
-import { WorkflowSchema } from './persistence/workflow.schema';
-import { Workflow } from './entities/workflow.entity';
+import { WorkflowSchema } from '../persistence/workflow.schema';
 import {
   WorkflowItemDto,
   WorkflowListResponseDto,
-} from './dtos/workflow-list-response.dto';
-import { CreateWorkflowDto } from './dtos/create-workflows.dto';
+} from '../dtos/workflow-list-response.dto';
+import { CreateWorkflowDto } from '../dtos/create-workflows.dto';
+import { Workflow } from '../entities/workflow.entity';
 
 @Injectable()
 export class WorkflowService {

@@ -32,7 +32,7 @@ export class WorkflowController {
   constructor(
     private readonly workflowService: WorkflowService,
     @InjectMapper() private readonly mapper: Mapper,
-  ) { }
+  ) {}
 
   @Get()
   @UsePipes(new ValidationPipe({ transform: true }))
@@ -63,9 +63,10 @@ export class WorkflowController {
   @ApiBody({ type: CreateWorkflowDto })
   @ApiCreatedResponse({ type: CreateWorkflowResponse })
   async create(
-    @Body() createWorkflowDto: CreateWorkflowDto
+    @Body() createWorkflowDto: CreateWorkflowDto,
   ): Promise<CreateWorkflowResponse> {
-    const workflow = await this.workflowService.createWorkflow(createWorkflowDto);
+    const workflow =
+      await this.workflowService.createWorkflow(createWorkflowDto);
 
     return this.mapper.map(workflow, Workflow, CreateWorkflowResponse);
   }

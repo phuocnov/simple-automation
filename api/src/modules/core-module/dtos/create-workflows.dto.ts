@@ -1,6 +1,6 @@
-import { Type } from "class-transformer";
-import { IsOptional } from "class-validator";
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { Type } from 'class-transformer';
+import { IsOptional } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateWorkflowDto {
   @ApiProperty({ description: 'Workflow name', example: 'Daily import' })
