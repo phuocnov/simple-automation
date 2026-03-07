@@ -29,13 +29,13 @@ let isRefreshing = false;
 
 type FailedRequest = {
   resolve: (value?: unknown) => void;
-  reject: (reason?: any) => void;
+  reject: (reason?: unknown) => void;
   config: AxiosRequestConfig;
 }
 
 let failedQueue: FailedRequest[] = [];
 
-const processQueue = (error: any, token: string | null = null) => {
+const processQueue = (error: unknown, token: string | null = null) => {
   failedQueue.forEach(({ resolve, reject, config }) => {
     if (error) {
       reject(error)
