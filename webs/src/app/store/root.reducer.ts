@@ -1,6 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit'
 import authReducer from '../../features/auth/auth.slice.ts'
+import workflowReducer from '../../features/dashboard/main-workflow.slice.ts'
 
 export const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  workflow: workflowReducer,
 })
