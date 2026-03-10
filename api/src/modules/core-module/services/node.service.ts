@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { NodeFactory } from 'src/shared/factory/node/node.factory';
+import { NodeFactory } from '@/shared/factory/node/node.factory';
 import { NodeDefinitionMapper } from '../mappers/node-definition.mapper';
 
 @Injectable()

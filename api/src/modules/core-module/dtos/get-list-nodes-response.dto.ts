@@ -1,4 +1,4 @@
-import { ResponsePaginationModel } from 'src/modules/common/models/responses/response.pagination.model';
+import { ResponsePaginationModel } from '@/modules/common/models/responses/response.pagination.model';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class NodePortDto {

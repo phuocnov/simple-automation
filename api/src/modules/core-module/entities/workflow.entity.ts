@@ -1,4 +1,4 @@
-import { BaseEntity } from 'src/shared/domain/base.entity';
+import { BaseEntity } from '@/shared/domain/base.entity';
 import { Node } from './node.entity';
 import { Edge } from './edge.entity';
 

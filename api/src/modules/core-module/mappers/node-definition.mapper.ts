@@ -4,7 +4,7 @@ import {
   NodeDefinitionResponseDto,
   NodePortDto,
 } from '../dtos/get-list-nodes-response.dto';
-import toStringSafe from 'src/helpers/string.helper';
+import toStringSafe from '@/helpers/string.helper';
 
 @Injectable()
 export class NodeDefinitionMapper {

@@ -11,7 +11,7 @@ import { classes } from '@automapper/classes';
 import { WorkflowMapper } from './mappers/workflow.mapper';
 import { NodeMapper } from './mappers/node.mapper';
 import { EdgeMapper } from './mappers/edge.mapper';
-import { NodeFactory } from 'src/shared/factory/node/node.factory';
+import { NodeFactory } from '@/shared/factory/node/node.factory';
 import { WorkflowService } from './services/workflow.service';
 import { NodeService } from './services/node.service';
 import { NodeDefinitionMapper } from './mappers/node-definition.mapper';

@@ -1,4 +1,4 @@
-import { BaseSchema } from 'src/shared/infra/persistence/base.schema';
+import { BaseSchema } from '@/shared/infra/persistence/base.schema';
 import { Column, Entity, OneToMany } from 'typeorm';
 import { NodeSchema } from './node.schema';
 import { EdgeSchema } from './edge.schema';
