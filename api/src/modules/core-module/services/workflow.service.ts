@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { InjectMapper } from '@automapper/nestjs';
 import { Mapper } from '@automapper/core';
 import { v4 as uuidv4 } from 'uuid';
@@ -21,6 +21,7 @@ export class WorkflowService {
   ) {}
 
   async listWorkflows(
+    search?: string,
     limit?: number,
     offset?: number,
   ): Promise<WorkflowListResponseDto> {
@@ -28,6 +29,12 @@ export class WorkflowService {
       relations: ['nodes', 'edges'],
       take: limit,
       skip: offset,
+      where: search
+        ? [
+            { name: ILike(`%${search}%`) },
+            { description: ILike(`%${search}%`) },
+          ]
+        : {},
       order: { createdAt: 'DESC' },
     });
 
@@ -39,6 +46,17 @@ export class WorkflowService {
 
     return { items, total };
   }
+
+  async getWorkflowById(id: string): Promise<Workflow> {
+    const entity = await this.repository.findOne({
+      where: { id },
+      relations: ['nodes', 'edges'],
+    });
+    if (!entity) {
+      throw new Error('Workflow not found');
+    }
+    return this.mapper.map(entity, WorkflowSchema, Workflow);
+  };
 
   async createWorkflow(dto: CreateWorkflowDto): Promise<Workflow> {
     const workflowId = uuidv4();

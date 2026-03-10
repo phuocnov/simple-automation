@@ -4,8 +4,15 @@ import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { CreateWorkflowModal } from "./create-workflow-modal";
+import { useAppDispatch } from "@/app/store/hooks";
+import { Menu, X } from "lucide-react";
 
-export function Sidebar() {
+interface SidebarProps {
+    isCollapsed: boolean;
+    toggleCollapse: () => void;
+}
+
+export function Sidebar({ isCollapsed, toggleCollapse }: SidebarProps) {
     const form = useForm({
         defaultValues: {
             search: ""
@@ -27,25 +34,34 @@ export function Sidebar() {
         );
     }, [workflowResponse, searchValue]);
 
-    const handlerSelectWorkflow = (workflowId: string) => {
-        // TODO: dispatch action to set selected workflow in the store
-        console.log("Selected workflow ID:", workflowId);
+    const dispatch = useAppDispatch();
+    const handlerSelectWorkflow = async (workflowId: string) => {
+        const workflow = await workflowApi.getWorkflowById(workflowId);
+        dispatch({ type: 'workflow/setWorkflow', payload: workflow });
     }
 
     return (
     <div className="h-full bg-gray-200 p-4 overflow-y-auto">
-        <div className="mb-4">
-            <h2 className="text-lg font-bold mb-4">Workflow List</h2>
-            <CreateWorkflowModal />
+        <div className="mb-4 flex flex-row justify-between items-center">
+            {!isCollapsed && <h2 className="text-lg font-bold">Workflow List</h2>}
+            {isCollapsed ? (
+                <Menu className="text-sm hover:cursor-pointer mx-auto" onClick={toggleCollapse}/>
+            ) : (
+                <X className="text-sm hover:cursor-pointer" onClick={toggleCollapse}/>
+            )}
         </div>
-        <Input placeholder="Search workflows..." onChange={(e)=>
-            form.setValue("search", e.target.value)
-        }/>
         
-        {isLoading && <p className="text-sm text-gray-600 mt-4">Loading workflows...</p>}
-        {error && <p className="text-sm text-red-600 mt-4">Error loading workflows</p>}
-        
-        <div className="mt-4 space-y-2">
+        {!isCollapsed && (
+            <>
+                <CreateWorkflowModal />
+                <Input placeholder="Search workflows..." onChange={(e)=>
+                    form.setValue("search", e.target.value)
+                }/>
+                
+                {isLoading && <p className="text-sm text-gray-600 mt-4">Loading workflows...</p>}
+                {error && <p className="text-sm text-red-600 mt-4">Error loading workflows</p>}
+                
+                <div className="mt-4 space-y-2">
             {filteredWorkflows.map((workflow) => (
                 <div 
                     key={workflow.id} 
@@ -64,8 +80,9 @@ export function Sidebar() {
                     </div>
                 </div>
             ))}
-        </div>
+                </div>
+            </>
+        )}
     </div>
-
     );
 }

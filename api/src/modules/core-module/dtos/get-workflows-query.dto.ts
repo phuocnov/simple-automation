@@ -3,6 +3,17 @@ import { Type } from 'class-transformer';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 export class GetWorkflowsQueryDto {
   @ApiPropertyOptional({
+    description: 'Search term to filter workflows by name or description',
+    minimum: 1,
+    maximum: 100,
+    default: 10,
+    type: String,
+  })
+  @IsOptional()
+  @Type(() => String) // Converts string '10' from URL to number 10
+  search?: string; // Default value
+
+  @ApiPropertyOptional({
     description: 'Number of items to return',
     minimum: 1,
     maximum: 100,

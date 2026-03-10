@@ -55,7 +55,18 @@ export class WorkflowController {
   async findAll(
     @Query() dto: GetWorkflowsQueryDto,
   ): Promise<WorkflowListResponseDto> {
-    return this.workflowService.listWorkflows(dto.limit, dto.offset);
+    return this.workflowService.listWorkflows(
+      dto.search,
+      dto.limit,
+      dto.offset,
+    );
+  }
+
+  @Get(':id')
+  @ApiOperation({ summary: 'Get workflow by ID' })
+  @ApiOkResponse({ type: Workflow })
+  async findById(@Query('id') id: string): Promise<Workflow> {
+    return this.workflowService.getWorkflowById(id);
   }
 
   @Post()

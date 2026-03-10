@@ -44,7 +44,7 @@ export function CreateWorkflowModal() {
       <DialogTrigger asChild>
         <Button className="w-full mb-4">Create Workflow</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md bg-white">
         <DialogHeader>
           <DialogTitle>Create New Workflow</DialogTitle>
           <DialogDescription>
