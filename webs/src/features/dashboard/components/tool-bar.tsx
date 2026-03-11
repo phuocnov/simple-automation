@@ -1,25 +1,27 @@
-import { Menubar, MenubarContent, MenubarGroup, MenubarItem, MenubarMenu, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarTrigger } from "@/shared/components/ui/menubar";
-
+import { Menubar, MenubarContent, MenubarGroup, MenubarItem, MenubarMenu, MenubarSeparator, MenubarShortcut, MenubarTrigger } from "@/shared/components/ui/menubar";
+import { InserNodeModel } from "./insert-node-modal";
+import { useState } from "react";
 
 export function ToolBar() {
-    
+  const [open, setOpen] = useState(false);
 
-    return (
-    <Menubar className="w-72">
+  return (
+    <>
+      <Menubar className="w-full">
         <MenubarMenu>
-        <MenubarTrigger>File</MenubarTrigger>
-        <MenubarContent>
+          <MenubarTrigger>File</MenubarTrigger>
+          <MenubarContent>
             <MenubarGroup>
-            <MenubarItem>
+              <MenubarItem onClick={() => setOpen(true)}>
                 Insert New Node <MenubarShortcut>⌘T</MenubarShortcut>
-            </MenubarItem>
-            <MenubarItem>
-                New Window <MenubarShortcut>⌘N</MenubarShortcut>
-            </MenubarItem>
+              </MenubarItem>
+
             </MenubarGroup>
             <MenubarSeparator />
-        </MenubarContent>
+          </MenubarContent>
         </MenubarMenu>
-    </Menubar>
-    )
+      </Menubar>
+      <InserNodeModel open={open} onOpenChange={setOpen} />
+    </>
+  )
 }

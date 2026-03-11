@@ -7,10 +7,13 @@ export class NodeService {
   constructor(
     @Inject() private readonly nodeFactory: NodeFactory,
     private readonly mapper: NodeDefinitionMapper,
-  ) {}
+  ) { }
 
   getListNodes() {
     const raw = this.nodeFactory.getList();
-    return this.mapper.toResponseDtoList(raw);
+    return {
+      items: this.mapper.toResponseDtoList(raw),
+      total: this.mapper.toResponseDtoList(raw).length
+    };
   }
 }

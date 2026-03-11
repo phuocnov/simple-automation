@@ -1,24 +1,26 @@
 import type { WorkflowNode } from "@/domain/workflow/workflow.model"
+import type { Item } from "@/shared/api/node.api"
 import { createSlice } from "@reduxjs/toolkit"
+import { v4 as uuidv4 } from 'uuid'
 
 interface WorkflowState {
   id: string,
   name: string,
   description: string,
-  nodes: WorkflowNode[],
+  nodes: unknown[],
   edges: unknown[],
   handles: unknown[],
   mode: 'view' | 'edit',
 }
 
 const initialState: WorkflowState = {
-    id: '',
-    name: '',
-    description: '',
-    nodes: [],
-    edges: [],
-    handles: [],
-    mode: 'view',
+  id: '',
+  name: '',
+  description: '',
+  nodes: [],
+  edges: [],
+  handles: [],
+  mode: 'view',
 }
 
 const workflowSlice = createSlice({
@@ -45,9 +47,24 @@ const workflowSlice = createSlice({
         state.nodes[index] = action.payload
       }
     },
+    addNode(state, action: { payload: Item }) {
+      // TODO: convert node to react flow node and add to nodes state
+      const convertedNode = {
+        id: uuidv4(),
+        position: { x: 0, y: 0 },
+        data: {
+          label: action.payload.name,
+          type: action.payload.type,
+          inbound: action.payload.inbound,
+          outbound: action.payload.outbound,
+        },
+        type: action.payload.type
+      }
+      state.nodes = [...state.nodes, convertedNode]
+    }
   },
 })
 
-export const { setNodes, setEdges, setHandles, setWorkflow, onNodeChange } = workflowSlice.actions
+export const { setNodes, setEdges, setHandles, setWorkflow, onNodeChange, addNode } = workflowSlice.actions
 
 export default workflowSlice.reducer
