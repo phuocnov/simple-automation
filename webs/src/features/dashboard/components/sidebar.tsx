@@ -37,7 +37,10 @@ export function Sidebar({ isCollapsed, toggleCollapse }: SidebarProps) {
     const dispatch = useAppDispatch();
     const handlerSelectWorkflow = async (workflowId: string) => {
         const workflow = await workflowApi.getWorkflowById(workflowId);
-        dispatch({ type: 'workflow/setWorkflow', payload: workflow });
+        dispatch({ type: 'workflow/setWorkflow', payload: {
+            ...workflow,
+            mode: 'view',
+        } });
     }
 
     return (

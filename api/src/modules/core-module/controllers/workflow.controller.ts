@@ -2,6 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  Param,
+  ParseUUIDPipe,
   Post,
   Query,
   UsePipes,
@@ -65,7 +67,9 @@ export class WorkflowController {
   @Get(':id')
   @ApiOperation({ summary: 'Get workflow by ID' })
   @ApiOkResponse({ type: Workflow })
-  async findById(@Query('id') id: string): Promise<Workflow> {
+  async findById(
+    @Param('id', new ParseUUIDPipe()) id: string,
+  ): Promise<Workflow> {
     return this.workflowService.getWorkflowById(id);
   }
 

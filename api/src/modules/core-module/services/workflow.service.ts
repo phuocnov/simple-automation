@@ -56,7 +56,7 @@ export class WorkflowService {
       throw new Error('Workflow not found');
     }
     return this.mapper.map(entity, WorkflowSchema, Workflow);
-  };
+  }
 
   async createWorkflow(dto: CreateWorkflowDto): Promise<Workflow> {
     const workflowId = uuidv4();
